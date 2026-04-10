@@ -1,54 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
+/* ─── TU LUZ — Design Tokens ─────────────────────────────────────────────── */
 :root {
-  --background: #f8fffe;
-  --foreground: #1a3a2a;
-  --card: #ffffff;
-  --card-foreground: #1a3a2a;
-  --primary: #2d6a4f;
-  --primary-foreground: #ffffff;
-  --secondary: #d8f3dc;
-  --secondary-foreground: #1a3a2a;
-  --muted: #f0faf4;
-  --muted-foreground: #5a8a6a;
-  --accent: #40916c;
-  --accent-foreground: #ffffff;
-  --border: #b7e4c7;
-  --ring: #40916c;
-  --radius: 0.75rem;
+  /* Backgrounds */
+  --bg:            #FDFAF4;   /* warm ivory/cream */
+  --bg-soft:       #F9F2E6;   /* slightly deeper cream */
+  --bg-card:       #FFFFFF;
+
+  /* Gold / Amber — primary brand colour */
+  --gold:          #C4893A;
+  --gold-dark:     #9E6A24;
+  --gold-deeper:   #7A5019;
+  --gold-light:    #F0D9A8;
+  --gold-pale:     #FAF1DC;
+
+  /* Warm Purple — "luz" / spiritual accent */
+  --purple:        #7B5296;
+  --purple-dark:   #5D3A74;
+  --purple-light:  #E8D9F5;
+
+  /* Text */
+  --text:          #2D1E0F;   /* deep warm brown */
+  --text-mid:      #6B4A2A;
+  --text-muted:    #9C7A52;
+
+  /* Borders */
+  --border:        #EAD9BC;
+  --border-soft:   #F2E8D2;
+
+  /* Semantic */
+  --radius:        0.875rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-border: var(--border);
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --color-background: var(--bg);
+  --color-foreground:  var(--text);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Inter', var(--font-geist-sans), system-ui, sans-serif;
 }
 
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-* {
-  box-sizing: border-box;
+* { box-sizing: border-box; }
+
+/* Serif headings helper */
+.font-serif,
+h1, h2 {
+  font-family: 'Playfair Display', Georgia, serif;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Focus styles for accessibility */
+/* Focus */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--gold);
   outline-offset: 2px;
+}
+
+/* ─── Utility classes used across pages ────────────────────────────────────── */
+.tuluz-section       { padding: 4.5rem 1.5rem; }
+.tuluz-section-soft  { padding: 4.5rem 1.5rem; background: var(--bg-soft); }
+.tuluz-container     { max-width: 68rem; margin: 0 auto; }
+
+.tuluz-tag {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .75rem;
+}
+
+.tuluz-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .8rem 1.75rem; border-radius: var(--radius);
+  font-weight: 600; font-size: .925rem;
+  transition: all .25s ease; cursor: pointer; border: none;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.tuluz-btn-primary {
+  background: var(--gold); color: #fff;
+}
+.tuluz-btn-primary:hover { background: var(--gold-dark); }
+
+.tuluz-btn-outline {
+  border: 2px solid var(--gold); color: var(--gold); background: transparent;
+}
+.tuluz-btn-outline:hover { background: var(--gold-pale); }
+
+.tuluz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.25);
+  padding: 1.75rem;
 }

@@ -4,382 +4,561 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tuluz — Emprendimiento Consciente con Impacto Positivo</title>
-  <meta name="description" content="Plataforma que certifica y conecta emprendedoras con impacto positivo en Latinoamérica e Iberia. Next.js · Supabase · OpenAI." />
-  <meta property="og:title" content="Tuluz — Emprendimiento Consciente" />
-  <meta property="og:description" content="Certifica tu impacto. Construye tu MVP con IA. Conéctate con empresas ESG." />
-  <meta property="og:type" content="website" />
+  <meta name="description" content="Tuluz certifica y conecta emprendedoras con impacto positivo en Latinoamérica e Iberia. Construye tu MVP, obtén certificaciones ESG y conecta con empresas que valoran tu impacto." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green-dark:  #1b4332;
-      --green-mid:   #2d6a4f;
-      --green-light: #40916c;
-      --green-pale:  #d8f3dc;
-      --green-mint:  #95d5b2;
-      --green-mist:  #f0faf4;
-      --text:        #1a3a2a;
-      --muted:       #5a8a6a;
+      --bg:           #FDFAF4;
+      --bg-soft:      #F9F2E6;
+      --gold:         #C4893A;
+      --gold-dark:    #9E6A24;
+      --gold-light:   #F0D9A8;
+      --gold-pale:    #FAF1DC;
+      --purple:       #7B5296;
+      --text:         #2D1E0F;
+      --text-mid:     #6B4A2A;
+      --text-muted:   #9C7A52;
+      --border:       #EAD9BC;
+      --radius:       0.875rem;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-      background: #f8fffe;
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      font-family: 'Inter', system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
 
-    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--green-pale);
-      padding: .9rem 1.5rem;
+      background: rgba(253,250,244,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 16px rgba(45,30,15,.06);
+    }
+    .nav-inner {
+      max-width: 68rem; margin: 0 auto;
+      padding: 0 1.5rem; height: 4rem;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .logo { display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.1rem; color: var(--green-dark); }
-    .logo-icon {
-      width: 2rem; height: 2rem; background: var(--green-mid);
-      border-radius: .5rem; display: grid; place-items: center;
-      color: #fff; font-weight: 800; font-size: .9rem;
+    .logo {
+      display: flex; align-items: center; gap: .6rem; text-decoration: none;
     }
-    .nav-links { display: flex; gap: 1.5rem; }
-    .nav-links a { font-size: .875rem; color: var(--muted); transition: color .2s; }
-    .nav-links a:hover { color: var(--green-dark); }
+    .logo-icon {
+      width: 2.25rem; height: 2.25rem;
+      background: linear-gradient(135deg, #C4893A, #F0D9A8);
+      border-radius: .6rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-icon span {
+      color: #2D1E0F; font-weight: 900; font-size: 1rem;
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .logo-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700; font-size: 1.2rem; color: #2D1E0F;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: .9rem; font-weight: 500;
+      color: var(--text-mid); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      padding: .6rem 1.25rem; border-radius: .75rem; font-weight: 600;
-      font-size: .875rem; transition: all .2s; cursor: pointer; border: none;
+      padding: .55rem 1.25rem; border-radius: 10px;
+      font-weight: 600; font-size: .875rem;
+      text-decoration: none; transition: all .2s; cursor: pointer; border: none;
+      font-family: 'Inter', system-ui, sans-serif;
     }
-    .btn-primary { background: var(--green-mid); color: #fff; }
-    .btn-primary:hover { background: var(--green-dark); }
-    .btn-outline { border: 2px solid var(--green-pale); color: var(--green-mid); background: transparent; }
-    .btn-outline:hover { background: var(--green-mist); }
+    .btn-primary { background: var(--gold); color: #fff; }
+    .btn-primary:hover { background: var(--gold-dark); }
+    .btn-outline {
+      border: 2px solid var(--gold); color: var(--gold); background: transparent;
+    }
+    .btn-outline:hover { background: var(--gold-pale); }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 55%, var(--green-light) 100%);
-      color: #fff; padding: 5rem 1.5rem 4rem;
+      background: linear-gradient(135deg, #1A0F05 0%, #2D1E0F 45%, #3A1E0A 100%);
+      padding: 7rem 1.5rem 5rem;
+      text-align: center;
       position: relative; overflow: hidden;
     }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,.15) 1px, transparent 1px);
-      background-size: 32px 32px;
+      background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(196,137,58,.18) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .hero-inner { position: relative; max-width: 64rem; margin: 0 auto; }
-    .badge-pill {
-      display: inline-block; margin-bottom: 1.25rem;
-      padding: .35rem 1rem; border-radius: 9999px;
-      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
-      font-size: .8rem; font-weight: 500; color: var(--green-mint);
+    .hero-tag {
+      display: inline-block;
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold-light);
+      background: rgba(196,137,58,.15);
+      border: 1px solid rgba(196,137,58,.3);
+      padding: .4rem 1rem; border-radius: 99px;
+      margin-bottom: 2rem;
     }
-    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem; }
-    h1 span { color: var(--green-mint); }
-    .hero-sub { font-size: 1.1rem; color: #d8f3dc; max-width: 38rem; margin-bottom: 2.25rem; }
-    .hero-btns { display: flex; flex-wrap: wrap; gap: .75rem; }
-    .btn-white { background: #fff; color: var(--green-dark); border-radius: .75rem; padding: .85rem 2rem; font-weight: 700; font-size: 1rem; }
-    .btn-white:hover { background: var(--green-pale); }
-    .btn-ghost { border: 2px solid rgba(255,255,255,.4); color: #fff; border-radius: .75rem; padding: .85rem 2rem; font-weight: 600; font-size: 1rem; }
-    .btn-ghost:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.7); }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      color: #F0D9A8;
+      line-height: 1.15;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #C4A87A;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center;
+      margin-bottom: 4rem;
+    }
+    .btn-hero-primary {
+      background: var(--gold); color: #fff;
+      padding: .85rem 2rem; border-radius: 12px;
+      font-weight: 600; font-size: 1rem;
+      text-decoration: none; transition: all .2s;
+    }
+    .btn-hero-primary:hover { background: var(--gold-dark); transform: translateY(-1px); }
+    .btn-hero-outline {
+      border: 2px solid rgba(196,137,58,.5); color: var(--gold-light);
+      background: transparent;
+      padding: .85rem 2rem; border-radius: 12px;
+      font-weight: 600; font-size: 1rem;
+      text-decoration: none; transition: all .2s;
+    }
+    .btn-hero-outline:hover { border-color: var(--gold); background: rgba(196,137,58,.1); }
 
-    /* STATS */
+    /* ── STATS ── */
     .stats {
-      background: var(--green-dark); color: #fff;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem; padding: 1.75rem 1.5rem; text-align: center;
+      background: #2D1E0F;
+      padding: 2rem 1.5rem;
     }
-    .stat-val { font-size: 1.75rem; font-weight: 800; color: var(--green-mint); }
-    .stat-lbl { font-size: .8rem; color: #b7e4c7; margin-top: .2rem; }
-
-    /* SECTIONS */
-    section { padding: 4rem 1.5rem; }
-    .container { max-width: 64rem; margin: 0 auto; }
-    .section-tag { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--green-light); margin-bottom: .75rem; }
-    h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; margin-bottom: 1rem; }
-    .lead { font-size: 1.05rem; color: var(--muted); max-width: 36rem; }
-
-    /* CARDS GRID */
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
-    .card {
-      background: #fff; border: 1px solid var(--green-pale);
-      border-radius: 1.25rem; padding: 1.75rem;
+    .stats-grid {
+      max-width: 68rem; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem; text-align: center;
     }
-    .card-icon { font-size: 1.75rem; margin-bottom: 1rem; }
-    .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
-    .card p { font-size: .9rem; color: var(--muted); line-height: 1.65; }
-
-    /* STEPS */
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
-    .step-num { font-size: 3.5rem; font-weight: 900; color: var(--green-pale); line-height: 1; margin-bottom: .5rem; }
-    .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: .4rem; }
-    .step p { font-size: .875rem; color: var(--muted); }
-
-    /* AI BANNER */
-    .ai-banner {
-      background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
-      border-radius: 1.5rem; padding: 3rem 2.5rem; color: #fff;
+    .stat-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem; font-weight: 700; color: var(--gold-light);
+      display: block;
     }
-    .ai-banner .badge-pill { color: var(--green-mint); }
-    .ai-banner h2 { color: #fff; margin-bottom: 1rem; }
-    .ai-banner p { color: #d8f3dc; max-width: 36rem; margin-bottom: 1.75rem; font-size: 1rem; }
-    .btn-mint { background: var(--green-mint); color: var(--green-dark); padding: .75rem 1.75rem; border-radius: .75rem; font-weight: 700; }
-    .btn-mint:hover { background: var(--green-pale); }
-
-    /* TECH STACK */
-    .tech-bg { background: var(--green-mist); }
-    .tech-grid { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
-    .tech-pill {
-      padding: .5rem 1.1rem; border-radius: 9999px;
-      background: #fff; border: 1px solid var(--green-pale);
-      font-size: .85rem; font-weight: 600; color: var(--green-dark);
+    .stat-label {
+      font-size: .8rem; color: #8C6B47; margin-top: .25rem;
     }
 
-    /* MODULES */
-    .modules-list { display: grid; gap: .75rem; margin-top: 2rem; }
-    .module-item {
-      background: #fff; border: 1px solid var(--green-pale); border-radius: 1rem;
-      padding: 1.1rem 1.5rem; display: flex; align-items: center; gap: 1rem;
+    /* ── SECTION ── */
+    .section { padding: 5rem 1.5rem; }
+    .section-soft { padding: 5rem 1.5rem; background: var(--bg-soft); }
+    .container { max-width: 68rem; margin: 0 auto; }
+    .section-tag {
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: .75rem; display: block;
     }
-    .module-num {
-      width: 2.25rem; height: 2.25rem; background: var(--green-mist);
-      border-radius: .6rem; display: grid; place-items: center;
-      font-weight: 800; font-size: .9rem; color: var(--green-dark); flex-shrink: 0;
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: 700; color: var(--text);
+      line-height: 1.25; margin-bottom: 1rem;
     }
-    .module-name { font-weight: 600; font-size: .95rem; }
-    .module-tag { font-size: .75rem; color: var(--muted); margin-top: .1rem; }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-sub {
+      font-size: 1rem; color: var(--text-muted);
+      max-width: 520px; line-height: 1.8;
+    }
 
-    /* FOOTER */
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) * 1.25);
+      padding: 1.75rem;
+      transition: box-shadow .2s;
+    }
+    .feature-card:hover { box-shadow: 0 8px 32px rgba(45,30,15,.08); }
+    .feature-icon {
+      width: 2.75rem; height: 2.75rem;
+      background: linear-gradient(135deg, #C4893A, #F0D9A8);
+      border-radius: .75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--text); margin-bottom: .5rem;
+    }
+    .feature-card p {
+      font-size: .875rem; color: var(--text-muted); line-height: 1.7;
+    }
+
+    /* ── COURSES ── */
+    .courses-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .course-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: calc(var(--radius) * 1.25);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .course-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(45,30,15,.1); }
+    .course-top {
+      height: 5px;
+    }
+    .course-body { padding: 1.5rem; }
+    .course-badge {
+      font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      padding: .25rem .75rem; border-radius: 99px;
+      display: inline-block; margin-bottom: .875rem;
+    }
+    .course-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem; font-weight: 600; color: var(--text);
+      margin-bottom: .5rem; line-height: 1.35;
+    }
+    .course-card p {
+      font-size: .82rem; color: var(--text-muted); line-height: 1.65;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem; margin-top: 3rem; text-align: center;
+    }
+    .step-num {
+      width: 3rem; height: 3rem;
+      background: linear-gradient(135deg, #C4893A, #F0D9A8);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700; font-size: 1.1rem; color: #2D1E0F;
+      margin: 0 auto 1rem;
+    }
+    .step h3 {
+      font-size: .975rem; font-weight: 600; color: var(--text);
+      margin-bottom: .4rem;
+    }
+    .step p {
+      font-size: .82rem; color: var(--text-muted); line-height: 1.65;
+    }
+
+    /* ── MISSION ── */
+    .mission {
+      background: linear-gradient(135deg, #1A0F05 0%, #2D1E0F 60%, #3A2010 100%);
+      padding: 5rem 1.5rem; text-align: center;
+    }
+    .mission .section-tag { color: var(--gold-light); }
+    .mission h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: #F0D9A8; line-height: 1.2;
+      max-width: 700px; margin: 0 auto 1.5rem;
+    }
+    .mission h2 em { color: var(--gold); }
+    .mission p { color: #C4A87A; max-width: 520px; margin: 0 auto; line-height: 1.8; }
+
+    /* ── CTA ── */
+    .cta {
+      padding: 5rem 1.5rem; text-align: center;
+      background: var(--gold-pale);
+    }
+    .cta h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--text); margin-bottom: .75rem;
+    }
+    .cta h2 em { color: var(--gold); }
+    .cta p { color: var(--text-muted); margin-bottom: 2rem; }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
     footer {
-      background: var(--green-dark); color: #b7e4c7;
-      padding: 3rem 1.5rem 2rem;
+      background: #2D1E0F; color: #C4A87A;
+      padding: 3.5rem 1.5rem 2rem;
     }
-    .footer-inner { max-width: 64rem; margin: 0 auto; }
-    .footer-top { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; margin-bottom: 2rem; }
-    .footer-logo { font-size: 1.1rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: .6rem; margin-bottom: .5rem; }
-    .footer-desc { font-size: .875rem; max-width: 22rem; line-height: 1.6; }
-    .footer-links h4 { color: #fff; font-size: .875rem; margin-bottom: .75rem; }
-    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
-    .footer-links a { font-size: .85rem; transition: color .2s; }
-    .footer-links a:hover { color: #fff; }
-    .footer-bottom { border-top: 1px solid #2d6a4f; padding-top: 1.5rem; font-size: .8rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; }
+    .footer-grid {
+      max-width: 68rem; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2.5rem; margin-bottom: 2.5rem;
+    }
+    .footer-brand { grid-column: span 2; max-width: 22rem; }
+    .footer-brand p { font-size: .875rem; line-height: 1.75; }
+    .footer-col h4 {
+      color: #F0D9A8; font-weight: 600; font-size: .875rem; margin-bottom: .875rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .footer-col a { font-size: .875rem; color: #C4A87A; text-decoration: none; transition: color .2s; }
+    .footer-col a:hover { color: #F0D9A8; }
+    .footer-bottom {
+      max-width: 68rem; margin: 0 auto;
+      border-top: 1px solid #3D2B1A; padding-top: 1.5rem;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: .75rem;
+    }
+    .footer-bottom p { font-size: .8rem; color: #8C6B47; }
 
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .nav-links, .nav-auth { display: none; }
+      .hero { padding: 5rem 1.25rem 4rem; }
+      .footer-brand { grid-column: span 1; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">
-    <div class="logo-icon">T</div>
-    Tuluz
-  </div>
-  <div class="nav-links">
-    <a href="#como-funciona">Cómo funciona</a>
-    <a href="#stack">Stack</a>
-    <a href="#curso">Curso Demo</a>
-    <a href="https://github.com/Mcramos0527/tuluz-platform" target="_blank">GitHub</a>
-  </div>
-  <a href="https://github.com/Mcramos0527/tuluz-platform" class="btn btn-primary" target="_blank">Ver código →</a>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon"><span>T</span></div>
+        <span class="logo-name">Tuluz</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#plataforma">Plataforma</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#mision">Misión</a></li>
+      </ul>
+      <div class="nav-auth" style="display:flex;gap:.75rem;align-items:center;">
+        <a href="https://tuluz.vercel.app/login" class="btn btn-outline" style="font-size:.875rem;padding:.45rem 1rem;">Iniciar sesión</a>
+        <a href="https://tuluz.vercel.app/register" class="btn btn-primary">Registrarse</a>
+      </div>
+    </div>
+  </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <span class="badge-pill">Asociación sin fines de lucro · Latinoamérica e Iberia</span>
-    <h1>Tu impacto positivo<br><span>merece ser visto.</span></h1>
-    <p class="hero-sub">
-      Tuluz certifica y conecta emprendedoras con impacto real con empresas que necesitan
-      demostrar su cadena de valor sostenible. MVP + IA + certificaciones ESG.
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">✦ Emprendimiento Consciente con Impacto Positivo</div>
+    <h1>
+      Haz brillar tu negocio<br/>
+      con <em>impacto consciente.</em>
+    </h1>
+    <p>
+      Tuluz certifica y conecta emprendedoras con impacto positivo
+      en Latinoamérica e Iberia. Construye tu MVP guiada por IA,
+      obtén certificaciones ESG y conecta con empresas que valoran tu impacto.
     </p>
-    <div class="hero-btns">
-      <a href="https://github.com/Mcramos0527/tuluz-platform" class="btn-white" target="_blank">⭐ Ver en GitHub</a>
-      <a href="#como-funciona" class="btn-ghost">Explorar el proyecto</a>
+    <div class="hero-actions">
+      <a href="https://tuluz.vercel.app/register" class="btn-hero-primary">Comenzar ahora</a>
+      <a href="#plataforma" class="btn-hero-outline">Conocer la plataforma</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- STATS -->
-<div class="stats">
-  <div><div class="stat-val">21</div><div class="stat-lbl">Rutas Next.js</div></div>
-  <div><div class="stat-val">7</div><div class="stat-lbl">Tablas Supabase</div></div>
-  <div><div class="stat-val">4</div><div class="stat-lbl">Roles de usuario</div></div>
-  <div><div class="stat-val">GPT-4o</div><div class="stat-lbl">IA integrada</div></div>
-</div>
-
-<!-- PROBLEMA / SOLUCIÓN -->
-<section>
-  <div class="container">
-    <p class="section-tag">El problema</p>
-    <h2>El puente que faltaba</h2>
-    <p class="lead">Las regulaciones ESG obligan a las empresas a demostrar cadenas de valor sostenibles. Las emprendedoras crean ese valor pero son invisibles.</p>
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-icon">🏭</div>
-        <h3>Para empresas (B2B)</h3>
-        <p>Encuentra proveedoras certificadas para cumplir normativas ESG, documentar impacto social y justificar ante auditores tu cadena de valor sostenible.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🌱</div>
-        <h3>Para emprendedoras</h3>
-        <p>Certifica tu impacto, construye tu MVP guiada por IA, obtén insignias verificables y conecta con compradores conscientes que te buscan activamente.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CÓMO FUNCIONA -->
-<section id="como-funciona" style="background:var(--green-mist)">
-  <div class="container">
-    <p class="section-tag">Flujo de usuario</p>
-    <h2>Cómo funciona</h2>
-    <p class="lead">Cada módulo del curso genera automáticamente una pieza del MVP de la emprendedora.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <h3>Registro por rol</h3>
-        <p>Emprendedora, compradora, empresa corporativa o suscriptora. Cada rol tiene su propio flujo y acceso.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <h3>Curso + Examen IA</h3>
-        <p>La IA examina con preguntas específicas al negocio. Al superar el examen, genera automáticamente el entregable.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <h3>MVP Acumulado</h3>
-        <p>Cada módulo agrega una pieza al plan de negocio. La IA recuerda todo el contexto anterior.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <h3>Marketplace + Badges</h3>
-        <p>Perfil público certificado, insignias verificables con URL pública, y acceso al directorio ESG.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AI BANNER -->
-<section>
-  <div class="container">
-    <div class="ai-banner">
-      <span class="badge-pill">IA integrada · GPT-4o Streaming</span>
-      <h2>La IA sabe todo sobre tu negocio</h2>
-      <p>No es un chatbot genérico. Aprende de cada respuesta, recuerda tu contexto y construye tu plan de negocio de forma acumulativa módulo a módulo. Streaming en tiempo real vía SSE.</p>
-      <a href="https://github.com/Mcramos0527/tuluz-platform/blob/master/app/api/ai/exam/route.ts" class="btn-mint" target="_blank">Ver código del examen IA →</a>
-    </div>
-  </div>
-</section>
-
-<!-- TECH STACK -->
-<section id="stack" class="tech-bg">
-  <div class="container">
-    <p class="section-tag">Stack técnico</p>
-    <h2>Tecnología open source, coste mínimo</h2>
-    <p class="lead">Diseñado para correr en tiers gratuitos hasta el escalado. Objetivo: €0–20/mes hasta tracción.</p>
-    <div class="tech-grid">
-      <span class="tech-pill">Next.js 16 App Router</span>
-      <span class="tech-pill">TypeScript</span>
-      <span class="tech-pill">Tailwind CSS</span>
-      <span class="tech-pill">Supabase (PostgreSQL + Auth + Storage)</span>
-      <span class="tech-pill">Row Level Security</span>
-      <span class="tech-pill">OpenAI GPT-4o</span>
-      <span class="tech-pill">SSE Streaming</span>
-      <span class="tech-pill">Resend</span>
-      <span class="tech-pill">Vercel</span>
-    </div>
-  </div>
-</section>
-
-<!-- CURSO DEMO -->
-<section id="curso">
-  <div class="container">
-    <p class="section-tag">Curso incluido</p>
-    <h2>Emprendimiento Consciente — Fundamentos</h2>
-    <p class="lead">Demo funcional con 3 módulos completos, cada uno con examen IA y entregable para el MVP.</p>
-    <div class="modules-list">
-      <div class="module-item">
-        <div class="module-num">01</div>
-        <div>
-          <div class="module-name">Propuesta de Valor con Impacto</div>
-          <div class="module-tag">Entregable: Canvas de Propuesta de Valor</div>
-        </div>
-      </div>
-      <div class="module-item">
-        <div class="module-num">02</div>
-        <div>
-          <div class="module-name">Modelo de Negocio Sostenible</div>
-          <div class="module-tag">Entregable: Business Model Canvas Sostenible</div>
-        </div>
-      </div>
-      <div class="module-item">
-        <div class="module-num">03</div>
-        <div>
-          <div class="module-name">Comunicación de Impacto y Pitch</div>
-          <div class="module-tag">Entregable: Pitch de Impacto (2 minutos)</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA FINAL -->
-<section style="background:var(--green-mist); text-align:center">
-  <div class="container" style="max-width:42rem">
-    <h2>¿Lista para hacer visible tu impacto?</h2>
-    <p style="color:var(--muted);margin:1rem 0 2rem;font-size:1.05rem">
-      El código es open source. Clona el repo, añade tus credenciales Supabase y OpenAI, y despliega en Vercel en minutos.
-    </p>
-    <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center">
-      <a href="https://github.com/Mcramos0527/tuluz-platform" class="btn btn-primary" target="_blank" style="padding:.85rem 2rem;font-size:1rem">⭐ Clonar en GitHub</a>
-      <a href="https://github.com/Mcramos0527/tuluz-platform#readme" class="btn btn-outline" target="_blank" style="padding:.85rem 2rem;font-size:1rem">Leer documentación</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-grid">
       <div>
-        <div class="footer-logo">
-          <div class="logo-icon" style="background:var(--green-light)">T</div>
-          Tuluz
-        </div>
-        <p class="footer-desc">Asociación sin fines de lucro que certifica y conecta emprendedoras con impacto positivo en Latinoamérica e Iberia.</p>
+        <span class="stat-num">3 +</span>
+        <p class="stat-label">Módulos de certificación</p>
       </div>
-      <div class="footer-links">
-        <h4>Proyecto</h4>
+      <div>
+        <span class="stat-num">IA</span>
+        <p class="stat-label">Mentora personalizada</p>
+      </div>
+      <div>
+        <span class="stat-num">ESG</span>
+        <p class="stat-label">Certificación de impacto</p>
+      </div>
+      <div>
+        <span class="stat-num">LATAM</span>
+        <p class="stat-label">Latinoamérica e Iberia</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="section" id="plataforma">
+    <div class="container">
+      <span class="section-tag">✦ Por qué Tuluz</span>
+      <h2 class="section-title">La primera plataforma que combina<br/><em>IA, certificación y marketplace</em></h2>
+      <p class="section-sub">
+        Diseñada específicamente para emprendedoras conscientes que quieren construir negocios con propósito medible.
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>Mentora IA 24/7</h3>
+          <p>Tu mentora personal con GPT-4o te guía módulo a módulo, adapta el ritmo a tu contexto y genera tu MVP en tiempo real.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏅</div>
+          <h3>Certificación ESG</h3>
+          <p>Credencial verificable de impacto positivo con badge digital único. Cada certificación refleja trabajo real, no solo un examen.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <h3>Marketplace de Impacto</h3>
+          <p>Conecta tu perfil certificado con empresas B2B que priorizan proveedoras con métricas de sostenibilidad reales.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3>MVP Guiado</h3>
+          <p>No solo aprendes: construyes. Cada módulo genera una pieza real de tu plan de negocio, lista para presentar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="section-soft" id="cursos">
+    <div class="container">
+      <span class="section-tag">✦ Cursos</span>
+      <h2 class="section-title">Módulos de aprendizaje<br/><em>profundo y aplicado</em></h2>
+      <p class="section-sub">
+        Cada módulo combina contenido, conversación con IA y creación de un entregable real para tu negocio.
+      </p>
+      <div class="courses-grid">
+        <div class="course-card">
+          <div class="course-top" style="background: linear-gradient(90deg, #C4893A, #F0D9A8);"></div>
+          <div class="course-body">
+            <span class="course-badge" style="background:#FAF1DC;color:#C4893A;">Módulo 1</span>
+            <h3>Propuesta de Valor Consciente</h3>
+            <p>Define el problema real que resuelves, tu cliente ideal y tu diferenciación ESG en el mercado.</p>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-top" style="background: linear-gradient(90deg, #7B5296, #C4A8E8);"></div>
+          <div class="course-body">
+            <span class="course-badge" style="background:#F0E8FA;color:#7B5296;">Módulo 2</span>
+            <h3>Modelo de Negocio Sostenible</h3>
+            <p>Estructura tu modelo de ingresos con métricas de impacto integradas desde el diseño.</p>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-top" style="background: linear-gradient(90deg, #B85C38, #E8A882);"></div>
+          <div class="course-body">
+            <span class="course-badge" style="background:#FAEDE8;color:#B85C38;">Módulo 3</span>
+            <h3>Comunicación de Impacto</h3>
+            <p>Aprende a comunicar tu propósito de forma auténtica y convincente para inversores, clientes y aliados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <div class="container">
+      <span class="section-tag">✦ Proceso</span>
+      <h2 class="section-title" style="text-align:center;">Cómo funciona<br/><em>paso a paso</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Regístrate</h3>
+          <p>Crea tu cuenta en minutos y completa tu perfil de emprendedora con tus objetivos de impacto.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Aprende con IA</h3>
+          <p>Tu mentora IA te guía a través de cada módulo con conversaciones profundas y personalizadas.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Construye tu MVP</h3>
+          <p>Cada módulo genera piezas reales de tu plan de negocio. Al terminar tienes tu MVP completo.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Certifícate &amp; Conecta</h3>
+          <p>Obtén tu badge ESG verificable y aparece en el marketplace para conectar con empresas alineadas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="mission" id="mision">
+    <div class="container">
+      <span class="section-tag">✦ Nuestra misión</span>
+      <h2>
+        <em>Hacemos visible el impacto</em><br/>
+        que el mundo ya necesita.
+      </h2>
+      <p>
+        Tuluz es una asociación sin fines de lucro dedicada a certificar y conectar
+        emprendedoras conscientes. Creemos que el negocio y el propósito no son opuestos —
+        son la misma fuerza cuando se alinean con intención.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>Tu luz ya existe.<br/><em>Ahora hazla brillar.</em></h2>
+      <p>Únete a la comunidad de emprendedoras conscientes que están cambiando Latinoamérica e Iberia.</p>
+      <div class="cta-actions">
+        <a href="https://tuluz.vercel.app/register" class="btn btn-primary" style="padding:.8rem 2rem;font-size:1rem;border-radius:12px;">Comenzar gratis</a>
+        <a href="https://tuluz.vercel.app/marketplace" class="btn btn-outline" style="padding:.8rem 2rem;font-size:1rem;border-radius:12px;">Ver marketplace</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;">
+          <div class="logo-icon"><span>T</span></div>
+          <span style="font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:1.2rem;color:#F0D9A8;">Tuluz</span>
+        </div>
+        <p>Asociación sin fines de lucro que certifica y conecta emprendedoras con impacto positivo en Latinoamérica e Iberia.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Plataforma</h4>
         <ul>
-          <li><a href="https://github.com/Mcramos0527/tuluz-platform" target="_blank">Repositorio GitHub</a></li>
-          <li><a href="https://github.com/Mcramos0527/tuluz-platform/blob/master/supabase/migrations/001_initial_schema.sql" target="_blank">Schema SQL</a></li>
-          <li><a href="https://github.com/Mcramos0527/tuluz-platform/blob/master/supabase/migrations/002_demo_seed.sql" target="_blank">Seed de demo</a></li>
+          <li><a href="https://tuluz.vercel.app/marketplace">Marketplace</a></li>
+          <li><a href="https://tuluz.vercel.app/courses">Cursos</a></li>
+          <li><a href="https://tuluz.vercel.app/blog">Blog</a></li>
+          <li><a href="https://tuluz.vercel.app/register">Registrarse</a></li>
         </ul>
       </div>
-      <div class="footer-links">
-        <h4>Stack</h4>
+      <div class="footer-col">
+        <h4>Legal</h4>
         <ul>
-          <li><a href="https://nextjs.org" target="_blank">Next.js</a></li>
-          <li><a href="https://supabase.com" target="_blank">Supabase</a></li>
-          <li><a href="https://openai.com" target="_blank">OpenAI</a></li>
-          <li><a href="https://resend.com" target="_blank">Resend</a></li>
+          <li><a href="https://tuluz.vercel.app/privacidad">Privacidad</a></li>
+          <li><a href="https://tuluz.vercel.app/terminos">Términos de uso</a></li>
+          <li><a href="https://tuluz.vercel.app/contacto">Contacto</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Tuluz — Asociación sin fines de lucro</span>
-      <span>Construido con ❤ para Latinoamérica e Iberia</span>
+      <p>&copy; <script>document.write(new Date().getFullYear())</script> Tuluz — Asociación sin fines de lucro</p>
+      <p>Hecho con ✨ para Latinoamérica e Iberia</p>
     </div>
-  </div>
-</footer>
+  </footer>
 
 </body>
 </html>
