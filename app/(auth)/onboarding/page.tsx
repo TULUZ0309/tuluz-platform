@@ -288,7 +288,7 @@ export default function OnboardingPage() {
                       <option key={c} value={c}>{c}</option>
                     ))}
                   </optgroup>
-                  <optgroup label="Iberia">
+                  <optgroup label="Europa">
                     {['España', 'Portugal'].map((c) => (
                       <option key={c} value={c}>{c}</option>
                     ))}

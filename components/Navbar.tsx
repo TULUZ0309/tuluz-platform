@@ -26,7 +26,7 @@ export function Navbar() {
     }
   }, [])
 
-  const flagLabel = (lang: 'es' | 'en') => lang === 'es' ? '🇪🇸 ES' : '🇬🇧 EN'
+  const flagLabel = (lang: 'es' | 'en') => lang === 'es' ? 'ES' : 'EN'
 
   return (
     <header style={{

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     default: 'Tuluz — Emprendimiento Consciente con Impacto Positivo',
   },
   description:
-    'Tuluz certifica y conecta emprendedoras con impacto positivo en Latinoamérica e Iberia. Construye tu MVP, obtén certificaciones ESG y conecta con empresas que valoran tu impacto.',
+    'Tuluz certifica y conecta emprendedoras con impacto positivo en Latinoamérica y Europa. Construye tu MVP, obtén certificaciones ESG y conecta con empresas que valoran tu impacto.',
   keywords: ['emprendimiento consciente', 'sostenibilidad', 'ESG', 'Latinoamérica', 'certificación'],
   openGraph: {
     siteName: 'Tuluz',
